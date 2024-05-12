@@ -1,49 +1,53 @@
 Overview
 
-Design a comments service for a social media website which can support scalable levels
-of nesting. The service should return n first level comments. On clicking on view replies,
-the next level of comments should be fetched. Make reasonable assumptions with
-reasonable options for extensibility open. All the comments have associated likes and
-dislikes. One clicking on the likes or dislikes the list of the users participating in the
-like/dislike shall be displayed
-
-Deliverables:
-a) Design a basic service which can add comments, likes, dislikes to a social media
-post, replies to a comment, replies to replies and associated likes or dislikes.
-There should be a get api to satisfy the requirements.
-
-b) The API shal be scalable for a service where there can be 1000s of comments
-and each of the comment having 100s of levels.
-
-c) API design, Database design, relationship between entities, class design,
-pagination concepts
-
-d) If a craft demo is given a day in advance , brownie points for a test suite, and a
-working API.
-
-
-e) Basic UI is not mandatory yet would be nice to have in view of UX such as a
-hardcoded post content.
+    Design a comments service for a social media website which can support scalable levels
+    of nesting. The service should return n first level comments. On clicking on view replies,
+    the next level of comments should be fetched. Make reasonable assumptions with
+    reasonable options for extensibility open. All the comments have associated likes and
+    dislikes. One clicking on the likes or dislikes the list of the users participating in the
+    like/dislike shall be displayed
+    
+    Deliverables:
+    a) Design a basic service which can add comments, likes, dislikes to a social media
+    post, replies to a comment, replies to replies and associated likes or dislikes.
+    There should be a get api to satisfy the requirements.
+    
+    b) The API shal be scalable for a service where there can be 1000s of comments
+    and each of the comment having 100s of levels.
+    
+    c) API design, Database design, relationship between entities, class design,
+    pagination concepts
+    
+    d) If a craft demo is given a day in advance , brownie points for a test suite, and a
+    working API.
+    
+    
+    e) Basic UI is not mandatory yet would be nice to have in view of UX such as a
+    hardcoded post content.
 
 
 Assumptions
-1. No User Authentication Is Done
-2. No Hashing on User Name, Comment etc is done for security
-3. No operation such as delete or edit comment is supported for now.
-4. One Unique user can either like/dislike a comment
-5. Logging is not being used currently
-6. Basic Validation on Request Body/Param is added.
-7. MYSQL is used to store Data having three table: Comment, Reaction, User
-8. Second name for a user can be optional.
-9. To add comment or reaction on a comment/post user should exist in the system
-10. Sharding is not being used for databases currently.
-11. Using Spring boot To Make Rest Endpoint.
-12. Using Spring JPA to connect With Mysql Database
-13. Using Swgger For Testng
-14. Swagger Link: http://localhost:8080/swagger-ui/index.html
+
+       1. We are not managing Post related Details
+       2. No User Authentication Is Done
+       3. No Hashing on User Name, Comment etc is done for security
+       4. No operation such as delete or edit comment is supported for now.
+       5. One Unique user can either like/dislike a comment
+       6. Logging is not being used currently
+       7. Basic Validation on Request Body/Param is added.
+       8. MYSQL is used to store Data having three table: Comment, Reaction, User
+       9. Second name for a user can be optional.
+       10. To add comment or reaction on a comment/post user should exist in the system
+       11. Shading is not being used for databases currently.
+       12. Using Spring boot To Make Rest Endpoint.
+       13. Using Spring JPA to connect With Mysql Database
+       14. We don't have any UI and will be using Swagger For Testing Api's.
+       15. Swagger Link: http://localhost:8080/swagger-ui/index.html
 
 
-Table: Comment
+Tables: 
+
+Comment:
 
     @Table(name = "comment")
     public class Comment {
@@ -72,7 +76,7 @@ Table: Comment
     }
 
 
-Table: Reaction
+Reaction:
 
 
     public class Reaction {
@@ -99,7 +103,7 @@ Table: Reaction
     private Date reactionTime;
     }
 
-Table: User
+User:
 
     @Table(name = "user")
     public class User {
