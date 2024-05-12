@@ -46,7 +46,8 @@ public class RestResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Object> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex, WebRequest request) {
+    public ResponseEntity<Object> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex,
+                                                                        WebRequest request) {
         Map<String, List<String>> body = new HashMap<>();
         List<String> errors = ex.getBindingResult()
                 .getFieldErrors()

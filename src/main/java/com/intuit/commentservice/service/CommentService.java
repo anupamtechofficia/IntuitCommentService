@@ -9,6 +9,7 @@ import com.intuit.commentservice.model.ReactionType;
 import com.intuit.commentservice.model.User;
 import com.intuit.commentservice.repository.CommentRepository;
 import com.intuit.commentservice.repository.ReactionRepository;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.lang.NonNull;
@@ -33,10 +34,10 @@ public class CommentService {
     private ReactionRepository reactionRepository;
 
     public List<CommentResponseDTO> findAllComments(
-             @NonNull final Long postId, 
-             @NonNull final Long parentCommentId,
-             @NonNull final Integer page,
-             @NonNull final Integer pageSize) {
+            @NonNull final Long postId,
+            @NonNull final Long parentCommentId,
+            @NonNull final Integer page,
+            @NonNull final Integer pageSize) {
         final List<Comment> comments = commentRepository.findByParentCommentIdAndPostId(parentCommentId, postId,
                 PageRequest.of(page, pageSize));
         if (CollectionUtils.isEmpty(comments)) {
@@ -61,7 +62,7 @@ public class CommentService {
     }
 
     private List<CommentResponseDTO> mapToCommentDTO(
-            final List<Comment> comments, 
+            final List<Comment> comments,
             final List<ReactionCount> reactionCounts) {
         final List<CommentResponseDTO> list = new ArrayList<>();
         for (final Comment comment : comments) {
@@ -74,8 +75,11 @@ public class CommentService {
             final CommentResponseDTO commentDTO = new CommentResponseDTO();
             commentDTO.setComment(comment.getMessage());
             commentDTO.setCommentDate(comment.getCreateDate());
-            final String userName = comment.getUser().getFirstName() + " " + comment.getUser().getLastName();
-            commentDTO.setName(userName.trim());
+            final StringBuilder userName = new StringBuilder(comment.getUser().getFirstName());
+            if (!Strings.isEmpty(comment.getUser().getLastName())) {
+                userName.append(" " + comment.getUser().getLastName());
+            }
+            commentDTO.setName(userName.toString());
             commentDTO.setTotalLikes(likeCount.isPresent() ? likeCount.get().getTotal() : 0);
             commentDTO.setTotalDislikes(dislikeCount.isPresent() ? dislikeCount.get().getTotal() : 0);
             commentDTO.setId(comment.getCommentId());
@@ -85,7 +89,7 @@ public class CommentService {
     }
 
     private Comment mapToComment(
-            final CommentRequestDTO commentRequestDTO, 
+            final CommentRequestDTO commentRequestDTO,
             final Long postId,
             final Long parentCommentId) {
         return Comment.builder()

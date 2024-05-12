@@ -35,7 +35,8 @@ public class CommentsController {
                     defaultValue = "0") final Long parentCommentId,
             @Nullable @RequestParam(name = "page", defaultValue = "0") final Integer page,
             @Max(100) @Min(1) @Nullable @RequestParam(name = "pageSize", defaultValue = "10") final Integer pageSize) {
-        final List<CommentResponseDTO> comments = commentService.findAllComments(postId, parentCommentId, page, pageSize);
+        final List<CommentResponseDTO> comments = commentService.findAllComments(postId, parentCommentId,
+                page, pageSize);
         ResponseEntity.BodyBuilder entity = ResponseEntity.ok()
                 .header(HEADER_POST_ID, String.valueOf(postId));
         if (parentCommentId != 0L) {

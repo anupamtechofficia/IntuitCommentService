@@ -9,6 +9,7 @@ import com.intuit.commentservice.model.ReactionType;
 import com.intuit.commentservice.model.User;
 import com.intuit.commentservice.repository.CommentRepository;
 import com.intuit.commentservice.repository.ReactionRepository;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.lang.NonNull;
@@ -74,8 +75,11 @@ public class ReactionService {
             final ReactionResponseDTO reactionDTO = new ReactionResponseDTO();
             reactionDTO.setId(reaction.getReactionId());
             reactionDTO.setReactionDate(reaction.getReactionTime());
-            final String userName = reaction.getUser().getFirstName() + " " + reaction.getUser().getLastName();
-            reactionDTO.setName(userName.trim());
+            final StringBuilder userName = new StringBuilder(reaction.getUser().getFirstName());
+            if(!Strings.isEmpty(reaction.getUser().getLastName())){
+                userName.append(" " +reaction.getUser().getLastName());
+            }
+            reactionDTO.setName(userName.toString());
             reactionDTO.setReactionType(reaction.getReactionType().toString());
             list.add(reactionDTO);
         }
