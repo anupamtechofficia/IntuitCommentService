@@ -7,6 +7,8 @@ import com.intuit.commentservice.model.ReactionType;
 import com.intuit.commentservice.service.ReactionService;
 import jakarta.annotation.Nullable;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -32,7 +34,7 @@ public class ReactionsController {
             @PathVariable(required = true) final Long commentId,
             @RequestParam(value = REQUEST_PARAM_REACTION_TYPE) final Set<ReactionType> reactionType,
             @Nullable @RequestParam(name = "page", defaultValue = "0") Integer page,
-            @Nullable @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize)
+            @Max(100) @Min(1) @Nullable @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize)
             throws CommentServiceException {
         final List<ReactionResponseDTO> reactionDTO = reactionService.findAllUserThatReacted(commentId, reactionType,
                 page, pageSize);
