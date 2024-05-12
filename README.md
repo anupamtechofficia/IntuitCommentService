@@ -40,6 +40,8 @@ Assumptions
 11. Using Spring boot To Make Rest Endpoint.
 12. Using Spring JPA to connect With Mysql Database
 13. Logging is not being used currently
+14. Using Swgger For Testng
+15. Swagger Link: http://localhost:8080/swagger-ui/index.html
 
 
 Table: Comment
