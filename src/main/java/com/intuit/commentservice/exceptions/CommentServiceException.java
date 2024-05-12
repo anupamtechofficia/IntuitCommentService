@@ -10,8 +10,7 @@ public class CommentServiceException extends Exception {
     /**
      * Constructs a new {@link CommentServiceException}.
      *
-     * @param message
-     *        The message.
+     * @param message The message.
      */
     public CommentServiceException(final String message) {
         super(message);
@@ -20,10 +19,8 @@ public class CommentServiceException extends Exception {
     /**
      * Constructs a new {@link CommentServiceException}.
      *
-     * @param message
-     *        The message.
-     * @param cause
-     *        The cause.
+     * @param message The message.
+     * @param cause   The cause.
      */
     public CommentServiceException(final String message, final Throwable cause) {
         super(message, cause);
@@ -32,8 +29,7 @@ public class CommentServiceException extends Exception {
     /**
      * Constructs a new {@link CommentServiceException}.
      *
-     * @param cause
-     *        The cause.
+     * @param cause The cause.
      */
     public CommentServiceException(final Throwable cause) {
         super(cause);

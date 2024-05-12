@@ -1,7 +1,7 @@
 package com.intuit.commentservice.controller;
 
-import com.intuit.commentservice.dto.CommentResponseDTO;
 import com.intuit.commentservice.dto.CommentRequestDTO;
+import com.intuit.commentservice.dto.CommentResponseDTO;
 import com.intuit.commentservice.exceptions.CommentServiceException;
 import com.intuit.commentservice.service.CommentService;
 import jakarta.annotation.Nullable;
@@ -33,12 +33,12 @@ public class CommentsController {
             @PathVariable(required = true) final Long postId,
             @Nullable @RequestParam(value = REQUEST_PARAM_PARENT_COMMENT_IS,
                     defaultValue = "0") final Long parentCommentId,
-            @Nullable @RequestParam(name = "page",defaultValue = "0") Integer page,
-            @Nullable @RequestParam(name = "pageSize",defaultValue = "10") Integer pageSize) {
+            @Nullable @RequestParam(name = "page", defaultValue = "0") Integer page,
+            @Nullable @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize) {
         final List<CommentResponseDTO> comments = commentService.findAllComments(postId, parentCommentId, page, pageSize);
         ResponseEntity.BodyBuilder entity = ResponseEntity.ok()
                 .header(HEADER_POST_ID, String.valueOf(postId));
-        if (parentCommentId!=0L) {
+        if (parentCommentId != 0L) {
             entity.header(HEADER_PARENT_COMMENT_ID, String.valueOf(parentCommentId));
         }
         return entity.body(comments);

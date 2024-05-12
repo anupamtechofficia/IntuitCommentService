@@ -17,6 +17,7 @@ import java.util.Set;
 public interface ReactionRepository extends JpaRepository<Reaction, Long> {
     List<Reaction> findByCommentIdAndReactionTypeIn(@NonNull Long commentId, @NonNull Set<ReactionType> reactionType,
                                                     @NonNull Pageable pageable);
+
     Reaction findByUserAndCommentId(@NonNull User user, @NonNull Long commentId);
 
     @Query("SELECT new com.intuit.commentservice.model.ReactionCount(c.commentId, c.reactionType, COUNT(*)) "

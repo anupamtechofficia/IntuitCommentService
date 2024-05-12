@@ -1,7 +1,7 @@
 package com.intuit.commentservice.service;
 
-import com.intuit.commentservice.dto.CommentResponseDTO;
 import com.intuit.commentservice.dto.CommentRequestDTO;
+import com.intuit.commentservice.dto.CommentResponseDTO;
 import com.intuit.commentservice.exceptions.CommentNotFoundException;
 import com.intuit.commentservice.model.Comment;
 import com.intuit.commentservice.model.ReactionCount;
