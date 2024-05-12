@@ -34,8 +34,8 @@ public class ReactionService {
     public List<ReactionResponseDTO> findAllUserThatReacted(
             @NonNull final Long commentId,
             @NonNull final Set<ReactionType> reactionType,
-            @NonNull Integer page,
-            @NonNull Integer pageSize) throws CommentServiceException {
+            @NonNull final Integer page,
+            @NonNull final Integer pageSize) throws CommentServiceException {
 
         if (!commentRepository.existsByCommentId(commentId)) {
             throw new CommentNotFoundException(format(COMMENT_NOT_FOUND_EXCEPTION, commentId));

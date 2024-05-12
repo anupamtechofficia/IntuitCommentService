@@ -26,8 +26,8 @@ public class UserController {
             name = API_NAME_POST_COMMENT,
             value = POST_COMMENT)
     ResponseEntity<?> createUser(
-            @NotBlank @RequestParam(value = REQUEST_FIRST_NAME, required = true) String firstName,
-            @Nullable @RequestParam(value = REQUEST_SECOND_NAME, defaultValue = "") String secondName) {
+            @NotBlank @RequestParam(value = REQUEST_FIRST_NAME, required = true) final String firstName,
+            @Nullable @RequestParam(value = REQUEST_SECOND_NAME, defaultValue = "") final String secondName) {
         Long userId = userService.addUser(firstName, secondName);
         return ResponseEntity.noContent()
                 .header(HEADER_USER_ID, String.valueOf(userId)).build();

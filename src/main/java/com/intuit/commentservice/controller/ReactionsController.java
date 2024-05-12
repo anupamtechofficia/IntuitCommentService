@@ -33,8 +33,8 @@ public class ReactionsController {
     ResponseEntity<List<ReactionResponseDTO>> getListOfUserReacted(
             @PathVariable(required = true) final Long commentId,
             @RequestParam(value = REQUEST_PARAM_REACTION_TYPE) final Set<ReactionType> reactionType,
-            @Nullable @RequestParam(name = "page", defaultValue = "0") Integer page,
-            @Max(100) @Min(1) @Nullable @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize)
+            @Nullable @RequestParam(name = "page", defaultValue = "0") final Integer page,
+            @Max(100) @Min(1) @Nullable @RequestParam(name = "pageSize", defaultValue = "10") final Integer pageSize)
             throws CommentServiceException {
         final List<ReactionResponseDTO> reactionDTO = reactionService.findAllUserThatReacted(commentId, reactionType,
                 page, pageSize);
@@ -48,7 +48,7 @@ public class ReactionsController {
             value = POST_REACTION)
     ResponseEntity<?> postReaction(
             @PathVariable(required = true) final Long commentId,
-            @Valid @RequestBody(required = true) ReactionRequestDTO reactionRequestDTO) throws CommentServiceException {
+            @Valid @RequestBody(required = true) final ReactionRequestDTO reactionRequestDTO) throws CommentServiceException {
         Long reaction = reactionService.addReaction(commentId, reactionRequestDTO);
         return ResponseEntity.noContent()
                 .header(HEADER_REACTION_ID, String.valueOf(reaction)).build();

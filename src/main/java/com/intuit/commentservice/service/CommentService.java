@@ -32,8 +32,11 @@ public class CommentService {
     @Autowired
     private ReactionRepository reactionRepository;
 
-    public List<CommentResponseDTO> findAllComments(@NonNull Long postId, @NonNull Long parentCommentId, @NonNull Integer page,
-                                                    @NonNull Integer pageSize) {
+    public List<CommentResponseDTO> findAllComments(
+             @NonNull final Long postId, 
+             @NonNull final Long parentCommentId,
+             @NonNull final Integer page,
+             @NonNull final Integer pageSize) {
         final List<Comment> comments = commentRepository.findByParentCommentIdAndPostId(parentCommentId, postId,
                 PageRequest.of(page, pageSize));
         if (CollectionUtils.isEmpty(comments)) {
@@ -45,8 +48,10 @@ public class CommentService {
         return mapToCommentDTO(comments, reactionCounts);
     }
 
-    public Long addComment(@NonNull CommentRequestDTO commentRequestDTO, @NonNull Long postId,
-                           @NonNull Long parentCommentId)
+    public Long addComment(
+            @NonNull final CommentRequestDTO commentRequestDTO,
+            @NonNull final Long postId,
+            @NonNull final Long parentCommentId)
             throws CommentNotFoundException {
         if (parentCommentId != 0L && !commentRepository.existsByCommentId(parentCommentId)) {
             throw new CommentNotFoundException(format(PARENT_COMMENT_NOT_FOUND_EXCEPTION, parentCommentId));
@@ -55,7 +60,9 @@ public class CommentService {
                 .getCommentId();
     }
 
-    private List<CommentResponseDTO> mapToCommentDTO(final List<Comment> comments, final List<ReactionCount> reactionCounts) {
+    private List<CommentResponseDTO> mapToCommentDTO(
+            final List<Comment> comments, 
+            final List<ReactionCount> reactionCounts) {
         final List<CommentResponseDTO> list = new ArrayList<>();
         for (final Comment comment : comments) {
             Optional<ReactionCount> likeCount = reactionCounts.stream().filter(rec ->
@@ -77,8 +84,10 @@ public class CommentService {
         return list;
     }
 
-    private Comment mapToComment(final CommentRequestDTO commentRequestDTO, final Long postId,
-                                 final Long parentCommentId) {
+    private Comment mapToComment(
+            final CommentRequestDTO commentRequestDTO, 
+            final Long postId,
+            final Long parentCommentId) {
         return Comment.builder()
                 .parentCommentId(parentCommentId)
                 .message(commentRequestDTO.getComment())
