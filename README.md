@@ -29,9 +29,9 @@ hardcoded post content.
 Assumptions
 1. No User Authentication Is Done
 2. No Hashing on User Name, Comment etc is done for security
-3. No Authentication is done for User 
-4. No operation such as delete or edit comment is supported for now.
-5. One Unique user can either like/dislike a comment
+3. No operation such as delete or edit comment is supported for now.
+4. One Unique user can either like/dislike a comment
+5. Logging is not being used currently
 6. Basic Validation on Request Body/Param is added.
 7. MYSQL is used to store Data having three table: Comment, Reaction, User
 8. Second name for a user can be optional.
@@ -39,9 +39,8 @@ Assumptions
 10. Sharding is not being used for databases currently.
 11. Using Spring boot To Make Rest Endpoint.
 12. Using Spring JPA to connect With Mysql Database
-13. Logging is not being used currently
-14. Using Swgger For Testng
-15. Swagger Link: http://localhost:8080/swagger-ui/index.html
+13. Using Swgger For Testng
+14. Swagger Link: http://localhost:8080/swagger-ui/index.html
 
 
 Table: Comment
@@ -124,7 +123,6 @@ Table: User
 DATABASE SETUP
 
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    brew install mysql
     brew install mysql
     mysql_secure_installation
 
